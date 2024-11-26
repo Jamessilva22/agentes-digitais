@@ -1,5 +1,18 @@
 import { useState } from "react";
 import BeneficiarioController from "../controller/BeneficiarioController";
+import {
+  TextField,
+  Checkbox,
+  FormControlLabel,
+  FormGroup,
+  Button,
+  Grid,
+  Typography,
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
+} from "@mui/material";
 
 const BeneficiarioForm = () => {
   const [beneficiarios, setBeneficiarios] = useState([]);
@@ -64,191 +77,228 @@ const BeneficiarioForm = () => {
   return (
     <div>
       <form>
-        <div>
-          <label>Nome Completo: </label>
-          <input
-            type="text"
-            name="nomeCompleto"
-            placeholder="Nome Completo"
-            value={formData.nomeCompleto}
-            onChange={handleChange}
-            required
-          />
-        </div>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Typography variant="h6">Dados Pessoais</Typography>
+          </Grid>
 
-        <div>
-          <label>Nome Social: </label>
-          <input
-            type="text"
-            name="nomeSocial"
-            placeholder="Nome Social (se houver)"
-            value={formData.nomeSocial}
-            onChange={handleChange}
-          />
-        </div>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="Nome Completo"
+              name="nomeCompleto"
+              placeholder="Nome Completo"
+              value={formData.nomeCompleto}
+              onChange={handleChange}
+              required
+            />
+          </Grid>
 
-        <div>
-          <label>CPF: </label>
-          <input
-            type="text"
-            name="cpf"
-            placeholder="CPF"
-            value={formData.cpf}
-            onChange={handleChange}
-            required
-          />
-        </div>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="Nome Social (se houver)"
+              name="nomeSocial"
+              placeholder="Nome Social"
+              value={formData.nomeSocial}
+              onChange={handleChange}
+            />
+          </Grid>
 
-        <div>
-          <label>NIS/PIS: </label>
-          <input
-            type="text"
-            name="nisPis"
-            placeholder="NIS/PIS"
-            value={formData.nisPis}
-            onChange={handleChange}
-          />
-        </div>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="CPF"
+              name="cpf"
+              placeholder="CPF"
+              value={formData.cpf}
+              onChange={handleChange}
+              required
+            />
+          </Grid>
 
-        <div>
-          <label>Data de Nascimento: </label>
-          <input
-            type="date"
-            name="dataNascimento"
-            value={formData.dataNascimento}
-            onChange={handleChange}
-            required
-          />
-        </div>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="NIS/PIS"
+              name="nisPis"
+              placeholder="NIS/PIS"
+              value={formData.nisPis}
+              onChange={handleChange}
+            />
+          </Grid>
 
-        <div>
-          <label>Identidade de gênero: </label>
-          <select name="sexo" value={formData.sexo} onChange={handleChange} required>
-            <option value="">Selecione</option>
-            <option value="homemCis">Homem cis</option>
-            <option value="mulherCis">Mulher cis</option>
-            <option value="homemTrans">Homem trans</option>
-            <option value="mulherTrans">Mulher trans</option>
-          </select>
-        </div>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="Data de Nascimento"
+              type="date"
+              name="dataNascimento"
+              InputLabelProps={{ shrink: true }}
+              value={formData.dataNascimento}
+              onChange={handleChange}
+              required
+            />
+          </Grid>
 
-        <div>
-          <label>Carteira de Identidade: </label>
-          <input
-            type="text"
-            name="carteiraIdentidade"
-            placeholder="Carteira de Identidade"
-            value={formData.carteiraIdentidade}
-            onChange={handleChange}
-          />
-        </div>
+          <Grid item xs={12} sm={6}>
+            <FormControl fullWidth>
+              <InputLabel>Identidade de Gênero</InputLabel>
+              <Select
+                name="sexo"
+                value={formData.sexo}
+                onChange={handleChange}
+                required
+              >
+                <MenuItem value="">
+                  <em>Selecione</em>
+                </MenuItem>
+                <MenuItem value="homemCis">Homem cis</MenuItem>
+                <MenuItem value="mulherCis">Mulher cis</MenuItem>
+                <MenuItem value="homemTrans">Homem trans</MenuItem>
+                <MenuItem value="mulherTrans">Mulher trans</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
 
-        <div>
-          <label>Órgão Expedidor: </label>
-          <input
-            type="text"
-            name="orgaoExpedidor"
-            placeholder="Órgão Expedidor"
-            value={formData.orgaoExpedidor}
-            onChange={handleChange}
-          />
-        </div>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="Carteira de Identidade"
+              name="carteiraIdentidade"
+              placeholder="Carteira de Identidade"
+              value={formData.carteiraIdentidade}
+              onChange={handleChange}
+            />
+          </Grid>
 
-        <div>
-          <label>UF: </label>
-          <input
-            type="text"
-            name="uf"
-            placeholder="UF"
-            value={formData.uf}
-            onChange={handleChange}
-          />
-        </div>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="Órgão Expedidor"
+              name="orgaoExpedidor"
+              placeholder="Órgão Expedidor"
+              value={formData.orgaoExpedidor}
+              onChange={handleChange}
+            />
+          </Grid>
 
-        <div>
-          <label>Nacionalidade: </label>
-          <input
-            type="text"
-            name="nacionalidade"
-            placeholder="Nacionalidade"
-            value={formData.nacionalidade}
-            onChange={handleChange}
-          />
-        </div>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="UF"
+              name="uf"
+              placeholder="UF"
+              value={formData.uf}
+              onChange={handleChange}
+            />
+          </Grid>
 
-        <div>
-          <label>Possui Deficiência? </label>
-          <input
-            type="checkbox"
-            name="possuiDeficiencia"
-            checked={formData.possuiDeficiencia}
-            onChange={handleChange}
-          />
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="Nacionalidade"
+              name="nacionalidade"
+              placeholder="Nacionalidade"
+              value={formData.nacionalidade}
+              onChange={handleChange}
+            />
+          </Grid>
+
+          <Grid item xs={12}>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  name="possuiDeficiencia"
+                  checked={formData.possuiDeficiencia}
+                  onChange={handleChange}
+                />
+              }
+              label="Possui Deficiência?"
+            />
+          </Grid>
+
           {formData.possuiDeficiencia && (
-            <div>
-              <label>Descreva a Deficiência: </label>
-              <input
-                type="text"
+            <Grid item xs={12} sm={3}>
+              <TextField
+                fullWidth
+                label="Descrição da Deficiência"
                 name="descricaoDeficiencia"
                 placeholder="Descrição da Deficiência"
                 value={formData.descricaoDeficiencia}
                 onChange={handleChange}
               />
-            </div>
+            </Grid>
           )}
-        </div>
-        <div>
-          <label>Nome Completo da Mãe: </label>
-          <input
-            type="text"
-            name="nomeMae"
-            placeholder="Nome Completo da Mãe"
-            value={formData.nomeMae}
-            onChange={handleChange}
-            required
-          />
-        </div>
 
-        <div>
-          <label>Nome Completo do Pai: </label>
-          <input
-            type="text"
-            name="nomePai"
-            placeholder="Nome Completo do Pai"
-            value={formData.nomePai}
-            onChange={handleChange}
-          />
-        </div>
+          <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
+              <Typography variant="h6">Filiação</Typography>
+            </Grid>
+            <TextField
+              fullWidth
+              label="Nome Completo da Mãe"
+              name="nomeMae"
+              placeholder="Nome Completo da Mãe"
+              value={formData.nomeMae}
+              onChange={handleChange}
+              required
+            />
+            <TextField
+              fullWidth
+              label="Nome Completo do Pai"
+              name="nomePai"
+              placeholder="Nome Completo do Pai"
+              value={formData.nomePai}
+              onChange={handleChange}
+            />
+          </Grid>
 
-        <div>
-          <label>Profissão/Ocupação: </label>
-          <input
-            type="text"
-            name="profissao"
-            placeholder="Profissão/Ocupação"
+          <Grid item xs={12} sm={3}>
+          <Grid item xs={12}>
+              <Typography variant="h6">Renda Familiar</Typography>
+            </Grid>
+            <TextField
+              fullWidth
+              label="Renda Familiar"
+              name="rendaFamiliar"
+              placeholder="Renda Familiar"
+              value={formData.rendaFamiliar}
+              onChange={handleChange}
+            />
+            <TextField
+              fullWidth
+              label="Profissão/Ocupação"
+              name="profissao"
+              placeholder="Profissão/Ocupação"
+              value={formData.profissao}
+              onChange={handleChange}
+            />
+          </Grid>
+          <Grid>
+            <TextField
+            fullWidth
+            label="RG"
+            name="RG"
+            placeholder="Insira o RG"
             value={formData.profissao}
-            onChange={handleChange}
-          />
-        </div>
+            onChange={handleChange}/>
+          </Grid>
 
-        <div>
-          <label>Renda Familiar: </label>
-          <input
-            type="text"
-            name="rendaFamiliar"
-            placeholder="Renda Familiar"
-            value={formData.rendaFamiliar}
-            onChange={handleChange}
-          />
-        </div>
-
-        <button type="button" onClick={handleAddBeneficiario}>
-          Adicionar Beneficiário
-        </button>
+          <Grid item xs={12}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleAddBeneficiario}
+            >
+              Adicionar Beneficiário
+            </Button>
+          </Grid>
+        </Grid>
       </form>
 
       <div>
-        <h3>Beneficiários Adicionados: </h3>
+        <Typography variant="h6">Beneficiários Adicionados:</Typography>
         <ul>
           {beneficiarios.map((b, index) => (
             <li key={index}>{b.nomeCompleto}</li>
@@ -256,9 +306,9 @@ const BeneficiarioForm = () => {
         </ul>
       </div>
 
-      <button type="button" onClick={handleSubmit}>
+      <Button variant="contained" color="secondary" onClick={handleSubmit}>
         Gerar Documento
-      </button>
+      </Button>
     </div>
   );
 };
