@@ -82,7 +82,7 @@ const BeneficiarioForm = () => {
             <Typography variant="h6">Dados Pessoais</Typography>
           </Grid>
 
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={4}>
             <TextField
               fullWidth
               label="Nome Completo"
@@ -92,20 +92,6 @@ const BeneficiarioForm = () => {
               onChange={handleChange}
               required
             />
-          </Grid>
-
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              label="Nome Social (se houver)"
-              name="nomeSocial"
-              placeholder="Nome Social"
-              value={formData.nomeSocial}
-              onChange={handleChange}
-            />
-          </Grid>
-
-          <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
               label="CPF"
@@ -117,7 +103,18 @@ const BeneficiarioForm = () => {
             />
           </Grid>
 
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={4}>
+            <TextField
+              fullWidth
+              label="Nome Social (se houver)"
+              name="nomeSocial"
+              placeholder="Nome Social"
+              value={formData.nomeSocial}
+              onChange={handleChange}
+            />
+          </Grid>
+
+          <Grid item xs={12} sm={4}>
             <TextField
               fullWidth
               label="NIS/PIS"
@@ -125,10 +122,11 @@ const BeneficiarioForm = () => {
               placeholder="NIS/PIS"
               value={formData.nisPis}
               onChange={handleChange}
+              inputProps={{ maxLength: 15 }}
             />
           </Grid>
 
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={2}>
             <TextField
               fullWidth
               label="Data de Nascimento"
@@ -141,7 +139,7 @@ const BeneficiarioForm = () => {
             />
           </Grid>
 
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={2}>
             <FormControl fullWidth>
               <InputLabel>Identidade de Gênero</InputLabel>
               <Select
@@ -161,7 +159,7 @@ const BeneficiarioForm = () => {
             </FormControl>
           </Grid>
 
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={4}>
             <TextField
               fullWidth
               label="Carteira de Identidade"
@@ -172,7 +170,7 @@ const BeneficiarioForm = () => {
             />
           </Grid>
 
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={1}>
             <TextField
               fullWidth
               label="Órgão Expedidor"
@@ -183,7 +181,7 @@ const BeneficiarioForm = () => {
             />
           </Grid>
 
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={1}>
             <TextField
               fullWidth
               label="UF"
@@ -194,7 +192,7 @@ const BeneficiarioForm = () => {
             />
           </Grid>
 
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={2}>
             <TextField
               fullWidth
               label="Nacionalidade"
@@ -231,7 +229,7 @@ const BeneficiarioForm = () => {
             </Grid>
           )}
 
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={4}>
             <Grid item xs={12}>
               <Typography variant="h6">Filiação</Typography>
             </Grid>
@@ -244,18 +242,20 @@ const BeneficiarioForm = () => {
               onChange={handleChange}
               required
             />
-            <TextField
-              fullWidth
-              label="Nome Completo do Pai"
-              name="nomePai"
-              placeholder="Nome Completo do Pai"
-              value={formData.nomePai}
-              onChange={handleChange}
-            />
+            <Grid>
+              <TextField
+                fullWidth
+                label="Nome Completo do Pai"
+                name="nomePai"
+                placeholder="Nome Completo do Pai"
+                value={formData.nomePai}
+                onChange={handleChange}
+              />
+            </Grid>
           </Grid>
 
           <Grid item xs={12} sm={3}>
-          <Grid item xs={12}>
+            <Grid item xs={12}>
               <Typography variant="h6">Renda Familiar</Typography>
             </Grid>
             <TextField
@@ -274,15 +274,16 @@ const BeneficiarioForm = () => {
               value={formData.profissao}
               onChange={handleChange}
             />
-          </Grid>
-          <Grid>
-            <TextField
-            fullWidth
-            label="RG"
-            name="RG"
-            placeholder="Insira o RG"
-            value={formData.profissao}
-            onChange={handleChange}/>
+            <Grid>
+              <TextField
+                fullWidth
+                label="RG"
+                name="RG"
+                placeholder="Insira o RG"
+                value={formData.profissao}
+                onChange={handleChange}
+              />
+            </Grid>
           </Grid>
 
           <Grid item xs={12}>
