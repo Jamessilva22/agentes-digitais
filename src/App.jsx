@@ -10,6 +10,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/beneficiario" element={<BeneficiarioForm />} />
+          <Route path="/tela-escolha" element={<telaEscolha />} />
         </Routes>
       </div>
     </Router>
