@@ -7,107 +7,200 @@ import {
   InputLabel,
   Typography,
   Box,
-  Grid,
+  Grid2,
+  Checkbox,
+  FormControlLabel,
 } from "@mui/material";
+
+const initialDadosConjuge = {
+  nome: "",
+  nomeSocial: "",
+  nisPis: "",
+  cpf: "",
+  dataNascimento: "",
+  identidadeGenero: "",
+  carteiraIdentidade: "",
+  orgaoExpedidor: "",
+  uf: "",
+  nacionalidade: "",
+  nomePai: "",
+  nomeMae: "",
+  telefone: "",
+  ocupacaoProfissional: "",
+  deficienciaDescricao: "",
+};
 
 const FormularioImovel = () => {
   const [tipoContrato, setTipoContrato] = useState("");
   const [tipoOcupacao, setTipoOcupacao] = useState("");
   const [outroContrato, setOutroContrato] = useState("");
   const [tempoResidencial, setTempoResidencial] = useState("");
+  const [estadoCivil, setEstadoCivil] = useState("");
+  const [deficiencia, setDeficiencia] = useState(false);
+  const [dadosConjuge, setDadosConjuge] = useState(initialDadosConjuge);
 
-  const handleContratoChange = (event) => {
-    setTipoContrato(event.target.value);
-    if (event.target.value !== "outros") {
-      setOutroContrato("");
-    }
+  const handleInputChange = (setter) => (event) => setter(event.target.value);
+  const handleCheckboxChange = (setter) => (event) => setter(event.target.checked);
+  const handleObjectChange = (setState) => (e) => {
+    const { name, value } = e.target;
+    setState((prevState) => ({ ...prevState, [name]: value }));
   };
 
+  const renderTextField = (label, value, onChange, name = "", fullWidth = true) => (
+    <TextField label={label} value={value} onChange={onChange} name={name} fullWidth={fullWidth} margin="normal" />
+  );
+
+  const renderSelect = (label, value, onChange, options) => (
+    <FormControl fullWidth margin="normal">
+      <InputLabel>{label}</InputLabel>
+      <Select value={value} onChange={onChange}>
+        {options.map((option) => (
+          <MenuItem key={option.value} value={option.value}>
+            {option.label}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
+  );
+
   return (
-    <Box sx={{ maxWidth: 600, margin: "0 auto", padding: 2 }}>
+    <Box sx={{ maxWidth: 900, margin: "0 auto", padding: 2 }}>
       <Typography variant="h6" gutterBottom>
         Forma de aquisição
       </Typography>
-      <FormControl sx={{ width: "66%" }} fullWidth margin="normal">
-        <InputLabel>Selecione</InputLabel>
-        <Select xs={4} value={tipoContrato} onChange={handleContratoChange}>
-          <MenuItem value="contrato_promessa_compra_venda">
-            Contrato de promessa de compra e venda
-          </MenuItem>
-          <MenuItem value="escritura_publica_compra_venda">
-            Escritura pública de compra e venda
-          </MenuItem>
-          <MenuItem value="heranca">Herança</MenuItem>
-          <MenuItem value="contrato_particular">Contrato particular</MenuItem>
-          <MenuItem value="outros">Outros</MenuItem>
-        </Select>
-      </FormControl>
-      {tipoContrato === "outros" && (
-        <TextField
-          label="Descreva o tipo de contrato"
-          value={outroContrato}
-          onChange={(e) => setOutroContrato(e.target.value)}
-          fullWidth
-          margin="normal"
-        />
-      )}
+
+      <Grid2 container spacing={0.5}>
+        <Grid2 item xs={12} size={6}>
+          {renderSelect("Selecione", tipoContrato, handleInputChange(setTipoContrato), [
+            { value: "contrato_promessa_compra_venda", label: "Contrato de promessa de compra e venda" },
+            { value: "escritura_publica_compra_venda", label: "Escritura pública de compra e venda" },
+            { value: "heranca", label: "Herança" },
+            { value: "contrato_particular", label: "Contrato particular" },
+            { value: "outros", label: "Outros" },
+          ])}
+        </Grid2>
+
+        {tipoContrato === "outros" && (
+          <Grid2 item xs={12} sm={6}>
+            {renderTextField("Descreva o tipo de contrato", outroContrato, handleInputChange(setOutroContrato))}
+          </Grid2>
+        )}
+
+        <Grid2 item xs={12} size={3}>
+          {renderSelect("Tipo de Ocupação", tipoOcupacao, handleInputChange(setTipoOcupacao), [
+            { value: "proprietario", label: "Proprietário" },
+            { value: "inquilino", label: "Inquilino" },
+            { value: "herdeiro", label: "Herdeiro" },
+          ])}
+        </Grid2>
+
+        <Grid2 item xs={12} sm={6}>
+          {renderTextField("Tempo Residencial no Imóvel", tempoResidencial, handleInputChange(setTempoResidencial))}
+        </Grid2>
+      </Grid2>
+
       <Typography variant="h6" gutterBottom>
         Dados do Imóvel
       </Typography>
-      <Grid container spacing={1}>
-        <Grid item xs={8}>
-          <TextField label="Endereço" fullWidth />
-        </Grid>
-        <Grid item xs={8}>
-          <TextField label="Complemento" fullWidth />
-        </Grid>
-        <Grid item xs={8}>
-          <TextField label="Bairro" fullWidth />
-        </Grid>
-        <Grid item xs={8}>
-          <TextField label="Cidade" fullWidth />
-        </Grid>
-        <Grid item xs={8}>
-          <TextField label="CEP" fullWidth />
-        </Grid>
-        <Grid item xs={8}>
-          <TextField label="Ponto de Referência" fullWidth />
-        </Grid>
-        <Grid item xs={8}>
-          <FormControl fullWidth>
-            <InputLabel>Tipo de Ocupação</InputLabel>
-            <Select
-              value={tipoOcupacao}
-              onChange={(e) => setTipoOcupacao(e.target.value)}
-            >
-              <MenuItem value="proprietario">Proprietário</MenuItem>
-              <MenuItem value="inquilino">Inquilino</MenuItem>
-              <MenuItem value="herdeiro">Herdeiro</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item xs={8}>
-          <TextField
-            label="Tempo Residencial no Imóvel"
-            value={tempoResidencial}
-            onChange={(e) => setTempoResidencial(e.target.value)}
-            fullWidth
-          />
-        </Grid>
-      </Grid>
+      <Grid2 container spacing={0.5}>
+        {["Endereço", "Complemento", "Bairro", "Cidade", "CEP", "Ponto de Referência"].map((label) => (
+          <Grid2 item xs={12} sm={6} key={label}>
+            {renderTextField(label, "")}
+          </Grid2>
+        ))}
+      </Grid2>
 
-      <Typography variant="h6">Informações sobre o Beneficiario:</Typography>
-      <Grid container spacing={1}>
-        <Grid item xs={8}>
-          <TextField label="Nome completo" />
-        </Grid>
-        <Grid item xs={8}>
-          <TextField label='NIS/PIS' />
-        </Grid>
-        <Grid item xs={8}>
-          <TextField label=''/>
-        </Grid>
-      </Grid>
+      <Typography variant="h6">Informações sobre o Beneficiário:</Typography>
+      <Grid2 container spacing={0.5}>
+        {["Nome completo", "Nome social (se houver)"].map((label) => (
+          <Grid2 item xs={12} sm={6} key={label}>
+            {renderTextField(label, "")}
+          </Grid2>
+        ))}
+        {["CPF", "NIS/PIS", "Carteira de identidade", "Órgão expedidor", "UF", "Nacionalidade"].map((label) => (
+          <Grid2 item xs={12} sm={6} key={label}>
+            {renderTextField(label, "")}
+          </Grid2>
+        ))}
+        <Grid2 item xs={12} size={4}>
+          {renderSelect("Identidade de gênero", "", handleInputChange(() => {}), [
+            { value: "masculino", label: "Masculino" },
+            { value: "feminino", label: "Feminino" },
+            { value: "naoBinario", label: "Não binário" },
+          ])}
+        </Grid2>
+      </Grid2>
+
+      <Typography variant="h6" gutterBottom>
+        Filiação
+      </Typography>
+      <Grid2 container spacing={0.5}>
+        {["Nome do pai", "Nome da mãe", "Email", "Telefone (01)", "Telefone (02)", "Ocupação profissional"].map(
+          (label) => (
+            <Grid2 item xs={12} sm={6} key={label}>
+              {renderTextField(label, "")}
+            </Grid2>
+          )
+        )}
+      </Grid2>
+
+      <Grid2 container spacing={0.5}>
+        <Grid2 item xs={12} size={6}>
+          {renderSelect("Estado Civil", estadoCivil, handleInputChange(setEstadoCivil), [
+            { value: "solteiro", label: "Solteiro(a)" },
+            { value: "casado", label: "Casado(a)" },
+            { value: "viuvo", label: "Viúvo(a)" },
+          ])}
+        </Grid2>
+      </Grid2>
+
+      {estadoCivil === "casado" && (
+        <>
+          <Typography variant="h6" gutterBottom>
+            Dados do Cônjuge
+          </Typography>
+          <Grid2 container spacing={0.5}>
+            {renderSelect("Regime de casamento", "", handleInputChange(() => {}), [
+              { value: "comunhaoTotalBens", label: "Comunhão total de bens" },
+              { value: "comunhaoParcialBens", label: "Comunhão parcial de bens" },
+              { value: "separacaoBens", label: "Separação de bens" },
+            ])}
+            {[
+              "Nome completo",
+              "Nome social (se houver)",
+              "NIS/PIS",
+              "CPF",
+              "Data de nascimento",
+              "Carteira de identidade",
+              "Órgão expedidor",
+              "UF",
+              "Nacionalidade",
+              "Nome do pai",
+              "Nome da mãe",
+              "Telefone",
+              "Ocupação profissional",
+            ].map((label) => (
+              <Grid2 item xs={12} sm={6} key={label}>
+                {renderTextField(label, dadosConjuge[label.toLowerCase()], handleObjectChange(setDadosConjuge), label.toLowerCase())}
+              </Grid2>
+            ))}
+
+            <Grid2 item xs={12}>
+              <FormControlLabel
+                control={
+                  <Checkbox checked={deficiencia} onChange={handleCheckboxChange(setDeficiencia)} name="deficiencia" />
+                }
+                label="Possui deficiência?"
+              />
+            </Grid2>
+            {deficiencia && (
+              <Grid2 item xs={12}>
+                {renderTextField("Descreva a deficiência", dadosConjuge.deficienciaDescricao, handleObjectChange(setDadosConjuge), "deficienciaDescricao")}
+              </Grid2>
+            )}
+          </Grid2>
+        </>
+      )}
     </Box>
   );
 };
