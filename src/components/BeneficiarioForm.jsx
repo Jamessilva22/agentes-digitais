@@ -1,317 +1,115 @@
-import { useState } from "react";
-import BeneficiarioController from "../controller/BeneficiarioController";
+import React, { useState } from "react";
 import {
   TextField,
-  Checkbox,
-  FormControlLabel,
-  FormGroup,
-  Button,
-  Grid,
-  Typography,
   Select,
   MenuItem,
-  InputLabel,
   FormControl,
+  InputLabel,
+  Typography,
+  Box,
+  Grid,
 } from "@mui/material";
 
-const BeneficiarioForm = () => {
-  const [beneficiarios, setBeneficiarios] = useState([]);
-  const [formData, setFormData] = useState({
-    nomeCompleto: "",
-    nomeSocial: "",
-    cpf: "",
-    nisPis: "",
-    dataNascimento: "",
-    sexo: "",
-    genero: "",
-    carteiraIdentidade: "",
-    orgaoExpedidor: "",
-    uf: "",
-    nacionalidade: "",
-    possuiDeficiencia: false,
-    descricaoDeficiencia: "",
-    documentacaoNecessaria: false,
-    nomeMae: "",
-    nomePai: "",
-    profissao: "",
-    rendaFamiliar: "",
-  });
+const FormularioImovel = () => {
+  const [tipoContrato, setTipoContrato] = useState("");
+  const [tipoOcupacao, setTipoOcupacao] = useState("");
+  const [outroContrato, setOutroContrato] = useState("");
+  const [tempoResidencial, setTempoResidencial] = useState("");
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === "checkbox" ? checked : value,
-    });
-  };
-
-  const handleAddBeneficiario = () => {
-    setBeneficiarios([...beneficiarios, formData]);
-    setFormData({
-      nomeCompleto: "",
-      nomeSocial: "",
-      cpf: "",
-      nisPis: "",
-      dataNascimento: "",
-      sexo: "",
-      genero: "",
-      carteiraIdentidade: "",
-      orgaoExpedidor: "",
-      uf: "",
-      nacionalidade: "",
-      possuiDeficiencia: false,
-      descricaoDeficiencia: "",
-      documentacaoNecessaria: false,
-      nomeMae: "",
-      nomePai: "",
-      profissao: "",
-      rendaFamiliar: "",
-    });
-  };
-
-  const handleSubmit = async () => {
-    const payload = { beneficiario: beneficiarios };
-    await BeneficiarioController.submitBeneficiarios(payload);
+  const handleContratoChange = (event) => {
+    setTipoContrato(event.target.value);
+    if (event.target.value !== "outros") {
+      setOutroContrato("");
+    }
   };
 
   return (
-    <div>
-      <form>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <Typography variant="h6">Dados Pessoais</Typography>
-          </Grid>
-
-          <Grid item xs={12} sm={4}>
-            <TextField
-              fullWidth
-              label="Nome Completo"
-              name="nomeCompleto"
-              placeholder="Nome Completo"
-              value={formData.nomeCompleto}
-              onChange={handleChange}
-              required
-            />
-            <TextField
-              fullWidth
-              label="CPF"
-              name="cpf"
-              placeholder="CPF"
-              value={formData.cpf}
-              onChange={handleChange}
-              required
-            />
-          </Grid>
-
-          <Grid item xs={12} sm={4}>
-            <TextField
-              fullWidth
-              label="Nome Social (se houver)"
-              name="nomeSocial"
-              placeholder="Nome Social"
-              value={formData.nomeSocial}
-              onChange={handleChange}
-            />
-          </Grid>
-
-          <Grid item xs={12} sm={4}>
-            <TextField
-              fullWidth
-              label="NIS/PIS"
-              name="nisPis"
-              placeholder="NIS/PIS"
-              value={formData.nisPis}
-              onChange={handleChange}
-              inputProps={{ maxLength: 15 }}
-            />
-          </Grid>
-
-          <Grid item xs={12} sm={2}>
-            <TextField
-              fullWidth
-              label="Data de Nascimento"
-              type="date"
-              name="dataNascimento"
-              InputLabelProps={{ shrink: true }}
-              value={formData.dataNascimento}
-              onChange={handleChange}
-              required
-            />
-          </Grid>
-
-          <Grid item xs={12} sm={2}>
-            <FormControl fullWidth>
-              <InputLabel>Identidade de Gênero</InputLabel>
-              <Select
-                name="sexo"
-                value={formData.sexo}
-                onChange={handleChange}
-                required
-              >
-                <MenuItem value="">
-                  <em>Selecione</em>
-                </MenuItem>
-                <MenuItem value="homemCis">Homem cis</MenuItem>
-                <MenuItem value="mulherCis">Mulher cis</MenuItem>
-                <MenuItem value="homemTrans">Homem trans</MenuItem>
-                <MenuItem value="mulherTrans">Mulher trans</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-
-          <Grid item xs={12} sm={4}>
-            <TextField
-              fullWidth
-              label="Carteira de Identidade"
-              name="carteiraIdentidade"
-              placeholder="Carteira de Identidade"
-              value={formData.carteiraIdentidade}
-              onChange={handleChange}
-            />
-          </Grid>
-
-          <Grid item xs={12} sm={1}>
-            <TextField
-              fullWidth
-              label="Órgão Expedidor"
-              name="orgaoExpedidor"
-              placeholder="Órgão Expedidor"
-              value={formData.orgaoExpedidor}
-              onChange={handleChange}
-            />
-          </Grid>
-
-          <Grid item xs={12} sm={1}>
-            <TextField
-              fullWidth
-              label="UF"
-              name="uf"
-              placeholder="UF"
-              value={formData.uf}
-              onChange={handleChange}
-            />
-          </Grid>
-
-          <Grid item xs={12} sm={2}>
-            <TextField
-              fullWidth
-              label="Nacionalidade"
-              name="nacionalidade"
-              placeholder="Nacionalidade"
-              value={formData.nacionalidade}
-              onChange={handleChange}
-            />
-          </Grid>
-
-          <Grid item xs={12}>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  name="possuiDeficiencia"
-                  checked={formData.possuiDeficiencia}
-                  onChange={handleChange}
-                />
-              }
-              label="Possui Deficiência?"
-            />
-          </Grid>
-
-          {formData.possuiDeficiencia && (
-            <Grid item xs={12} sm={3}>
-              <TextField
-                fullWidth
-                label="Descrição da Deficiência"
-                name="descricaoDeficiencia"
-                placeholder="Descrição da Deficiência"
-                value={formData.descricaoDeficiencia}
-                onChange={handleChange}
-              />
-            </Grid>
-          )}
-
-          <Grid item xs={12} sm={4}>
-            <Grid item xs={12}>
-              <Typography variant="h6">Filiação</Typography>
-            </Grid>
-            <TextField
-              fullWidth
-              label="Nome Completo da Mãe"
-              name="nomeMae"
-              placeholder="Nome Completo da Mãe"
-              value={formData.nomeMae}
-              onChange={handleChange}
-              required
-            />
-            <Grid>
-              <TextField
-                fullWidth
-                label="Nome Completo do Pai"
-                name="nomePai"
-                placeholder="Nome Completo do Pai"
-                value={formData.nomePai}
-                onChange={handleChange}
-              />
-            </Grid>
-          </Grid>
-
-          <Grid item xs={12} sm={3}>
-            <Grid item xs={12}>
-              <Typography variant="h6">Renda Familiar</Typography>
-            </Grid>
-            <TextField
-              fullWidth
-              label="Renda Familiar"
-              name="rendaFamiliar"
-              placeholder="Renda Familiar"
-              value={formData.rendaFamiliar}
-              onChange={handleChange}
-            />
-            <TextField
-              fullWidth
-              label="Profissão/Ocupação"
-              name="profissao"
-              placeholder="Profissão/Ocupação"
-              value={formData.profissao}
-              onChange={handleChange}
-            />
-            <Grid>
-              <TextField
-                fullWidth
-                label="RG"
-                name="RG"
-                placeholder="Insira o RG"
-                value={formData.profissao}
-                onChange={handleChange}
-              />
-            </Grid>
-          </Grid>
-
-          <Grid item xs={12}>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleAddBeneficiario}
-            >
-              Adicionar Beneficiário
-            </Button>
-          </Grid>
+    <Box sx={{ maxWidth: 600, margin: "0 auto", padding: 2 }}>
+      <Typography variant="h6" gutterBottom>
+        Forma de aquisição
+      </Typography>
+      <FormControl sx={{ width: "66%" }} fullWidth margin="normal">
+        <InputLabel>Selecione</InputLabel>
+        <Select xs={4} value={tipoContrato} onChange={handleContratoChange}>
+          <MenuItem value="contrato_promessa_compra_venda">
+            Contrato de promessa de compra e venda
+          </MenuItem>
+          <MenuItem value="escritura_publica_compra_venda">
+            Escritura pública de compra e venda
+          </MenuItem>
+          <MenuItem value="heranca">Herança</MenuItem>
+          <MenuItem value="contrato_particular">Contrato particular</MenuItem>
+          <MenuItem value="outros">Outros</MenuItem>
+        </Select>
+      </FormControl>
+      {tipoContrato === "outros" && (
+        <TextField
+          label="Descreva o tipo de contrato"
+          value={outroContrato}
+          onChange={(e) => setOutroContrato(e.target.value)}
+          fullWidth
+          margin="normal"
+        />
+      )}
+      <Typography variant="h6" gutterBottom>
+        Dados do Imóvel
+      </Typography>
+      <Grid container spacing={1}>
+        <Grid item xs={8}>
+          <TextField label="Endereço" fullWidth />
         </Grid>
-      </form>
+        <Grid item xs={8}>
+          <TextField label="Complemento" fullWidth />
+        </Grid>
+        <Grid item xs={8}>
+          <TextField label="Bairro" fullWidth />
+        </Grid>
+        <Grid item xs={8}>
+          <TextField label="Cidade" fullWidth />
+        </Grid>
+        <Grid item xs={8}>
+          <TextField label="CEP" fullWidth />
+        </Grid>
+        <Grid item xs={8}>
+          <TextField label="Ponto de Referência" fullWidth />
+        </Grid>
+        <Grid item xs={8}>
+          <FormControl fullWidth>
+            <InputLabel>Tipo de Ocupação</InputLabel>
+            <Select
+              value={tipoOcupacao}
+              onChange={(e) => setTipoOcupacao(e.target.value)}
+            >
+              <MenuItem value="proprietario">Proprietário</MenuItem>
+              <MenuItem value="inquilino">Inquilino</MenuItem>
+              <MenuItem value="herdeiro">Herdeiro</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={8}>
+          <TextField
+            label="Tempo Residencial no Imóvel"
+            value={tempoResidencial}
+            onChange={(e) => setTempoResidencial(e.target.value)}
+            fullWidth
+          />
+        </Grid>
+      </Grid>
 
-      <div>
-        <Typography variant="h6">Beneficiários Adicionados:</Typography>
-        <ul>
-          {beneficiarios.map((b, index) => (
-            <li key={index}>{b.nomeCompleto}</li>
-          ))}
-        </ul>
-      </div>
-
-      <Button variant="contained" color="secondary" onClick={handleSubmit}>
-        Gerar Documento
-      </Button>
-    </div>
+      <Typography variant="h6">Informações sobre o Beneficiario:</Typography>
+      <Grid container spacing={1}>
+        <Grid item xs={8}>
+          <TextField label="Nome completo" />
+        </Grid>
+        <Grid item xs={8}>
+          <TextField label='NIS/PIS' />
+        </Grid>
+        <Grid item xs={8}>
+          <TextField label=''/>
+        </Grid>
+      </Grid>
+    </Box>
   );
 };
 
-export default BeneficiarioForm;
+export default FormularioImovel;
