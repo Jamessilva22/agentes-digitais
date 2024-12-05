@@ -45,7 +45,7 @@ const Login = () => {
         justifyContent: "center",
         alignItems: "center",
         minHeight: "100vh",
-        position: "center",
+        minWidth: "100vw"
       }}
     >
       {/* Formulário de login */}
@@ -53,6 +53,7 @@ const Login = () => {
         sx={{
           display: "flex",
           flexDirection: "column",
+          justifyContent: "center",
           alignItems: "center",
           width: "100%",
           maxWidth: "400px",
