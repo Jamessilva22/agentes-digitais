@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { DefaultMenu } from "./defaultMenu.jsx";
 import {
   TextField,
   Select,
@@ -103,7 +104,7 @@ const FormularioImovel = () => {
         Dados do Imóvel
       </Typography>
       <Grid2 container spacing={0.5}>
-        {["Endereço", "Complemento", "Bairro", "Cidade", "CEP", "Ponto de Referência"].map((label) => (
+        {["Endereço", "Complemento", "Bairro", "Cidade", "CEP", "Ponto de Referência", "localidade", "Quadra", "Lote", "Edificação"].map((label) => (
           <Grid2 item xs={12} sm={6} key={label}>
             {renderTextField(label, "")}
           </Grid2>
@@ -122,7 +123,7 @@ const FormularioImovel = () => {
             {renderTextField(label, "")}
           </Grid2>
         ))}
-        <Grid2 item xs={12} size={4}>
+        <Grid2 item xs={12} size={3}>
           {renderSelect("Identidade de gênero", "", handleInputChange(() => {}), [
             { value: "masculino", label: "Masculino" },
             { value: "feminino", label: "Feminino" },
@@ -135,7 +136,7 @@ const FormularioImovel = () => {
         Filiação
       </Typography>
       <Grid2 container spacing={0.5}>
-        {["Nome do pai", "Nome da mãe", "Email", "Telefone (01)", "Telefone (02)", "Ocupação profissional"].map(
+        {["Nome da mãe","Nome do pai"].map(
           (label) => (
             <Grid2 item xs={12} sm={6} key={label}>
               {renderTextField(label, "")}
@@ -143,9 +144,18 @@ const FormularioImovel = () => {
           )
         )}
       </Grid2>
-
+      <Typography variant="h6" gutterBottom>
+        Contato
+      </Typography>
       <Grid2 container spacing={0.5}>
-        <Grid2 item xs={12} size={6}>
+        {["Email", "Telefone (01)", "Responsável", "Parentesco", "Telefone (02)", "Responsável", "Parentesco", "Ocupação profissional"].map(
+          (label) => (
+            <Grid2 item xs={12} sm={6} key={label}>
+              {renderTextField(label, "")}
+            </Grid2>
+          )
+        )}
+        <Grid2 item xs={12} size={3}>
           {renderSelect("Estado Civil", estadoCivil, handleInputChange(setEstadoCivil), [
             { value: "solteiro", label: "Solteiro(a)" },
             { value: "casado", label: "Casado(a)" },
@@ -154,12 +164,16 @@ const FormularioImovel = () => {
         </Grid2>
       </Grid2>
 
+      <Grid2 container spacing={0.5}>
+        
+      </Grid2>
+
       {estadoCivil === "casado" && (
         <>
           <Typography variant="h6" gutterBottom>
             Dados do Cônjuge
           </Typography>
-          <Grid2 container spacing={0.5}>
+          <Grid2 container spacing={0.5} size={4}>
             {renderSelect("Regime de casamento", "", handleInputChange(() => {}), [
               { value: "comunhaoTotalBens", label: "Comunhão total de bens" },
               { value: "comunhaoParcialBens", label: "Comunhão parcial de bens" },
