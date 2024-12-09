@@ -26,7 +26,7 @@ const Login = () => {
       });
       if (response.data.success) {
         console.log("usuário logado.");
-        navigate("/beneficiario");
+        navigate("/consulta");
       } else {
         console.log("credenciais incorretas", response.data.message);
       }
@@ -100,7 +100,7 @@ const Login = () => {
           </Button>
           <Grid container>
             <Grid item xs>
-              <a href="?seFoda">Esqueceu a senha?</a>
+              <a href="?jaEraPaizao">Esqueceu a senha?</a>
             </Grid>
           </Grid>
         </Box>
