@@ -1,0 +1,115 @@
+{
+    "beneficiarios": [
+      {
+        "area": "Santa Cruz do Capibaribe",
+        "nome": "Joãozinho da Silva",
+        "fase": 1,
+        "estadoCivil": "Casado",
+        "regimeCasamento": "Comunhão total de Bens",
+        "conjuge": "Mariazinha da Silva",
+        "cpf": true,
+        "rg": true,
+        "certidaoCasamento": true
+      },
+      {
+        "area": "Recife",
+        "nome": "Carlos Alberto Souza",
+        "fase": 1,
+        "estadoCivil": "Casado",
+        "regimeCasamento": "Separação total de Bens",
+        "conjuge": "Fernanda Costa Souza",
+        "cpf": true,
+        "rg": true,
+        "certidaoCasamento": true
+      },
+      {
+        "area": "Caruaru",
+        "nome": "Ana Carolina Pereira",
+        "fase": 1,
+        "estadoCivil": "Casada",
+        "regimeCasamento": "Comunhão parcial de Bens",
+        "conjuge": "Eduardo Martins Pereira",
+        "cpf": true,
+        "rg": true,
+        "certidaoCasamento": true
+      },
+      {
+        "area": "Garanhuns",
+        "nome": "Rogério Gomes Lima",
+        "fase": 1,
+        "estadoCivil": "Casado",
+        "regimeCasamento": "Comunhão parcial de Bens",
+        "conjuge": "Juliana Lima",
+        "cpf": true,
+        "rg": true,
+        "certidaoCasamento": true
+      },
+      {
+        "area": "Petrolina",
+        "nome": "Luciana Alves Souza",
+        "fase": 1,
+        "estadoCivil": "Casada",
+        "regimeCasamento": "Separação total de Bens",
+        "conjuge": "Ricardo Souza",
+        "cpf": true,
+        "rg": true,
+        "certidaoCasamento": true
+      },
+      {
+        "area": "Santa Cruz do Capibaribe",
+        "nome": "Márcio Pereira Santos",
+        "fase": 1,
+        "estadoCivil": "Casado",
+        "regimeCasamento": "Comunhão total de Bens",
+        "conjuge": "Cláudia Pereira Santos",
+        "cpf": true,
+        "rg": true,
+        "certidaoCasamento": true
+      },
+      {
+        "area": "Recife",
+        "nome": "Patrícia Oliveira Costa",
+        "fase": 1,
+        "estadoCivil": "Casada",
+        "regimeCasamento": "Comunhão parcial de Bens",
+        "conjuge": "Gustavo Costa Oliveira",
+        "cpf": true,
+        "rg": true,
+        "certidaoCasamento": true
+      },
+      {
+        "area": "Caruaru",
+        "nome": "Thiago Silva Mendes",
+        "fase": 1,
+        "estadoCivil": "Solteiro",
+        "regimeCasamento": "Nenhum",
+        "conjuge": "",
+        "cpf": true,
+        "rg": true,
+        "certidaoCasamento": false
+      },
+      {
+        "area": "Garanhuns",
+        "nome": "Juliana Alves Costa",
+        "fase": 2,
+        "estadoCivil": "Solteira",
+        "regimeCasamento": "Nenhum",
+        "conjuge": "",
+        "cpf": true,
+        "rg": true,
+        "certidaoCasamento": false
+      },
+      {
+        "area": "Petrolina",
+        "nome": "Felipe Ribeiro Martins",
+        "fase": 2,
+        "estadoCivil": "Casado",
+        "regimeCasamento": "Separação total de Bens",
+        "conjuge": "Mariana Ribeiro Martins",
+        "cpf": true,
+        "rg": true,
+        "certidaoCasamento": true
+      }
+    ]
+  }
+  
